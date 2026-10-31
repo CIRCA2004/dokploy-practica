@@ -11,7 +11,7 @@ app.get('/', (req, res) => {
     programa: 'Ingenieria de Sistemas y Computacion',
     curso: 'Administracion de Infraestructura de TI',
     plataforma: 'Dokploy PaaS',
-    version: '1.0.0',
+    version: '2.0.0',
     fecha: new Date().toISOString()
   });
 });
