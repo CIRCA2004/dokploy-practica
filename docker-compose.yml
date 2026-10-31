@@ -1,0 +1,33 @@
+services:
+  database:
+    image: mariadb:11
+    environment:
+      MARIADB_ROOT_PASSWORD: ${COMPOSE_DB_ROOT_PASSWORD}
+      MARIADB_DATABASE: compose_db
+      MARIADB_USER: compose_user
+      MARIADB_PASSWORD: ${COMPOSE_DB_PASSWORD}
+    volumes:
+      - compose-db-data:/var/lib/mysql
+    networks:
+      - compose-net
+    restart: unless-stopped
+
+  phpmyadmin:
+    image: phpmyadmin:latest
+    environment:
+      PMA_HOST: database
+      PMA_PORT: 3306
+    ports:
+      - "8080:80"
+    depends_on:
+      - database
+    networks:
+      - compose-net
+    restart: unless-stopped
+
+volumes:
+  compose-db-data:
+
+networks:
+  compose-net:
+    driver: bridge
